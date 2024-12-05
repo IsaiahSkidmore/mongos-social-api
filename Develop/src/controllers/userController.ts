@@ -20,7 +20,7 @@ import { Request, Response } from 'express';
         .populate('friends');
 
       if (!user) {
-        res.status(404).json({ message: 'No user with that ID' });
+        res.status(404).json({ message: 'No user found' });
       } else {
         res.json(user);
       }
@@ -50,7 +50,7 @@ import { Request, Response } from 'express';
       );
 
       if (!user) {
-        return res.status(404).json({ message: 'No user with this id!' });
+        return res.status(404).json({ message: 'No user found' });
       }
 
       return res.json(user)
@@ -117,7 +117,7 @@ import { Request, Response } from 'express';
       if (!user) {
           return res
               .status(404)
-              .json({ message: 'No user found with that ID :(' });
+              .json({ message: 'No user found' });
       }
 
       return res.json(user);

@@ -13,12 +13,6 @@ export const getThoughts = async (_req, res) => {
 export const getSingleThought = async (req, res) => {
     const { thoughtId } = req.params;
     try {
-        // const thought = await Thoughts.findOne({ _id: req.params.videoId })
-        // if (!thought) {
-        //   return res.status(404).json({ message: 'No thought with that ID' });
-        // }
-        // res.json(thought);
-        // return; 
         const user = await Thoughts.findById(thoughtId);
         if (user) {
             return res.json(user);
@@ -93,7 +87,7 @@ export const addThoughtReaction = async (req, res) => {
     try {
         const thought = await Thoughts.findOneAndUpdate({ _id: req.params.thoughtId }, { $addToSet: { reactions: req.body } }, { runValidators: true, new: true });
         if (!thought) {
-            return res.status(404).json({ message: 'No thought with this id!' });
+            return res.status(404).json({ message: 'No thought found!' });
         }
         res.json(thought);
         return;
@@ -108,7 +102,7 @@ export const removeThoughtReaction = async (req, res) => {
     try {
         const thought = await Thoughts.findOneAndUpdate({ _id: req.params.thoughtId }, { $pull: { reactions: { reactionId: req.params.reactionId } } }, { runValidators: true, new: true });
         if (!thought) {
-            return res.status(404).json({ message: 'No thought with this id!' });
+            return res.status(404).json({ message: 'No thought found!' });
         }
         res.json(thought);
         return;

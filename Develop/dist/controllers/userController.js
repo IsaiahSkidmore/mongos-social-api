@@ -17,7 +17,7 @@ export const getSingleUser = async (req, res) => {
             .populate('thoughts')
             .populate('friends');
         if (!user) {
-            res.status(404).json({ message: 'No user with that ID' });
+            res.status(404).json({ message: 'No user found' });
         }
         else {
             res.json(user);
@@ -43,7 +43,7 @@ export const updateUser = async (req, res) => {
     try {
         const user = await User.findOneAndUpdate({ _id: req.params.userId }, { $set: req.body }, { runValidators: true, new: true });
         if (!user) {
-            return res.status(404).json({ message: 'No user with this id!' });
+            return res.status(404).json({ message: 'No user found' });
         }
         return res.json(user);
     }
@@ -90,7 +90,7 @@ export const removeFriend = async (req, res) => {
         if (!user) {
             return res
                 .status(404)
-                .json({ message: 'No user found with that ID :(' });
+                .json({ message: 'No user found' });
         }
         return res.json(user);
     }

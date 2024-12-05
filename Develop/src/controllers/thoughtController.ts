@@ -15,14 +15,7 @@ import { Request, Response } from 'express';
   export const getSingleThought = async (req: Request, res: Response) => {
     const { thoughtId } = req.params;
     try {
-      // const thought = await Thoughts.findOne({ _id: req.params.videoId })
-  
-      // if (!thought) {
-      //   return res.status(404).json({ message: 'No thought with that ID' });
-      // }
-  
-      // res.json(thought);
-      // return; 
+
       const user = await Thoughts.findById(thoughtId);
 
       if (user) {
@@ -126,7 +119,7 @@ import { Request, Response } from 'express';
       );
 
       if (!thought) {
-        return res.status(404).json({ message: 'No thought with this id!' });
+        return res.status(404).json({ message: 'No thought found!' });
       }
 
       res.json(thought);
@@ -147,7 +140,7 @@ import { Request, Response } from 'express';
       )
 
       if (!thought) {
-        return res.status(404).json({ message: 'No thought with this id!' });
+        return res.status(404).json({ message: 'No thought found!' });
       }
 
       res.json(thought);
